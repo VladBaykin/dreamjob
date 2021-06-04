@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.Store" %>
-<%@ page import="model.Candidate" %>
+<%@ page import="dream.store.Store" %>
+<%@ page import="dream.model.Candidate" %>
 <!doctype html>
 <html lang="en">
 <head>

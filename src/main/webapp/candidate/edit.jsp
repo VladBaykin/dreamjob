@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.Store" %>
-<%@ page import="model.Post" %>
+<%@ page import="dream.store.Store" %>
+<%@ page import="dream.model.Post" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,10 +31,6 @@
                 <form>
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Описание</label>
                         <input type="text" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>

@@ -1,4 +1,4 @@
-package model;
+package dream.model;
 
 import java.util.Objects;
 

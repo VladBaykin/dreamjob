@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.Store" %>
-<%@ page import="model.Post" %>
+<%@ page import="dream.store.Store" %>
+<%@ page import="dream.model.Post" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,10 +25,10 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/posts.jsp">Вакансии</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/candidates.jsp">Кандидаты</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.Store" %>
-<%@ page import="model.Post" %>
+<%@ page import="dream.store.Store" %>
+<%@ page import="dream.model.Post" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,14 +28,10 @@
                 Новая вакансия.
             </div>
             <div class="card-body">
-                <form>
+                <form action="<%=request.getContextPath()%>/post/save" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Описание</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="name">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
