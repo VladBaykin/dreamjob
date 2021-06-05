@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dream.store.Store" %>
 <%@ page import="dream.model.Candidate" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,11 +24,20 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate cand = new Candidate(0, "");
+    Candidate can = new Candidate(0, "");
     if (id != null) {
-        cand = Store.instOf().findCandidateById(Integer.parseInt(id));
+        can = Store.instOf().findCandidateById(Integer.parseInt(id));
     }
 %>
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href='<c:url value="/index.do" />'>Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
@@ -39,11 +49,11 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=cand.getId()%>"
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>"
                       method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=cand.getName()%>">
+                        <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

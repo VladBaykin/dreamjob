@@ -2,6 +2,7 @@
 <%@ page import="dream.store.Store" %>
 <%@ page import="dream.model.Candidate" %>
 <%@ page import="java.util.Collection" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,6 +25,15 @@
   <title>Dream Job</title>
 </head>
 <body>
+<div class="container">
+  <div class="row">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href='<c:url value="/index.do" />'>Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
 <div class="container pt-3">
 
   <div class="row">
@@ -39,16 +49,16 @@
           </tr>
           </thead>
           <tbody>
-          <% for (Candidate can : (Collection<Candidate>) request.getAttribute("candidates")) { %>
-          <tr>
-            <td>
-              <a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=<%=can.getId()%>">
-                <i class="fa fa-edit mr-3"></i>
-              </a>
-              <%=can.getName()%>
-            </td>
-          </tr>
-          <% } %>
+          <c:forEach items="${candidates}" var="can">
+            <tr>
+              <td>
+                <a href='<c:url value="/candidate/edit.jsp?id=${can.id}"/>'>
+                  <i class="fa fa-edit mr-3"></i>
+                </a>
+                <c:out value="${can.name}"/>
+              </td>
+            </tr>
+          </c:forEach>
           </tbody>
         </table>
       </div>

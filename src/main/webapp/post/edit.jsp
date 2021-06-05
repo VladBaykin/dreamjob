@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dream.store.Store" %>
 <%@ page import="dream.model.Post" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,6 +29,15 @@
         post = Store.instOf().findPostById(Integer.parseInt(id));
     }
 %>
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href='<c:url value="/index.do" />'>Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
