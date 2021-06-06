@@ -1,7 +1,7 @@
 package dream.servlet;
 
 import dream.model.Post;
-import dream.store.Store;
+import dream.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ public class PostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Store.instOf().savePost(new Post(
+        MemStore.instOf().savePost(new Post(
                                         Integer.parseInt(req.getParameter("id")),
                                         req.getParameter("name")));
         resp.sendRedirect(req.getContextPath() + "/posts.do");
@@ -23,7 +23,7 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("posts", Store.instOf().findAllPosts());
+        req.setAttribute("posts", MemStore.instOf().findAllPosts());
         req.getRequestDispatcher("/post/posts.jsp").forward(req, resp);
     }
 }
