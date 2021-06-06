@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dream.store.MemStore" %>
+<%@ page import="dream.store.PsqlStore" %>
 <%@ page import="dream.model.Post" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
@@ -26,7 +26,7 @@
     String id = request.getParameter("id");
     Post post = new Post(0, "");
     if (id != null) {
-        post = MemStore.instOf().findPostById(Integer.parseInt(id));
+        post = PsqlStore.instOf().findPostById(Integer.parseInt(id));
     }
 %>
 <div class="container">

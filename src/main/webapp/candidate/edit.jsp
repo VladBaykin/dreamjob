@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dream.store.MemStore" %>
+<%@ page import="dream.store.PsqlStore" %>
 <%@ page import="dream.model.Candidate" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
@@ -26,7 +26,7 @@
     String id = request.getParameter("id");
     Candidate can = new Candidate(0, "");
     if (id != null) {
-        can = MemStore.instOf().findCandidateById(Integer.parseInt(id));
+        can = PsqlStore.instOf().findCandidateById(Integer.parseInt(id));
     }
 %>
 <div class="container">
