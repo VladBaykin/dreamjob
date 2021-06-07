@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dream.model.Candidate" %>
 <%@ page import="dream.store.PsqlStore" %>
-<%@ page import="dream.model.Post" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,44 +18,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <title>Job dream</title>
+    <title>Dream Job</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/posts.do" />'>Вакансии</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/candidates.do" />'>Кандидаты</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/post/edit.jsp" />'>Добавить вакансию</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/candidate/edit.jsp" />'>Добавить кандидата</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/login.jsp" />'>Войти</a>
-            </li>
-        </ul>
-    </div>
+<div class="container pt-3">
+
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Сегодняшние вакансии.
+                Авторизация
             </div>
             <div class="card-body">
-            </div>
-        </div>
-    </div>
-    <div class="row pt-3">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Сегодняшние кандидаты.
-            </div>
-            <div class="card-body">
+                <form action="<%=request.getContextPath()%>/auth.do" method="post">
+                    <div class="form-group">
+                        <label>Почта</label>
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="text" class="form-control" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
             </div>
         </div>
     </div>
