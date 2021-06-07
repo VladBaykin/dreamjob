@@ -31,6 +31,9 @@
             <li class="nav-item">
                 <a class="nav-link" href='<c:url value="/index.do" />'>Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+            </li>
         </ul>
     </div>
 </div>

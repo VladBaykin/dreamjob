@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dream.store.PsqlStore" %>
 <%@ page import="dream.model.Candidate" %>
+<%@ page import="dream.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -28,6 +29,7 @@
     if (id != null) {
         can = PsqlStore.instOf().findCandidateById(Integer.parseInt(id));
     }
+    User user = (User) request.getSession().getAttribute("user");
 %>
 <div class="container">
     <div class="row">

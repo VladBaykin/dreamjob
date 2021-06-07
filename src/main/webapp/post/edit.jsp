@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dream.store.PsqlStore" %>
 <%@ page import="dream.model.Post" %>
+<%@ page import="dream.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -28,6 +29,7 @@
     if (id != null) {
         post = PsqlStore.instOf().findPostById(Integer.parseInt(id));
     }
+    User user = (User) request.getSession().getAttribute("user");
 %>
 <div class="container">
     <div class="row">
@@ -35,6 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link" href='<c:url value="/index.do" />'>Home</a>
             </li>
+            <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
         </ul>
     </div>
 </div>
