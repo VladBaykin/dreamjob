@@ -2,6 +2,8 @@ package dream.store;
 
 import dream.model.Post;
 import dream.model.Candidate;
+import dream.model.User;
+
 import java.util.Collection;
 
 public interface Store {
@@ -12,4 +14,7 @@ public interface Store {
     Post findPostById(int id);
     Candidate findCandidateById(int id);
     int addPhoto(int id);
+    void saveUser(User user);
+    User findUserByEmail(String email);
+    Collection<User> findAllUsers();
 }
