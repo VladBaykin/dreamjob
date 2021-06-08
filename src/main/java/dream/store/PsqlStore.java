@@ -1,6 +1,7 @@
 package dream.store;
 
 import dream.model.Candidate;
+import dream.model.City;
 import dream.model.Post;
 import dream.model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -77,7 +78,8 @@ public class PsqlStore implements Store {
                     candidates.add(new Candidate(
                                     it.getInt("id"),
                                     it.getString("name"),
-                                    it.getInt("photo_id")));
+                                    it.getInt("photo_id"),
+                                    it.getString("city")));
                 }
             }
         } catch (Exception e) {
@@ -125,7 +127,7 @@ public class PsqlStore implements Store {
     private Candidate create(Candidate candidate) {
         try (Connection connection = pool.getConnection();
              PreparedStatement ps = connection.prepareStatement(
-                     "INSERT INTO candidate(name) VALUES (?)",
+                     "INSERT INTO candidate(name, city) VALUES (?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
             ps.execute();
@@ -180,9 +182,10 @@ public class PsqlStore implements Store {
     private void update(Candidate candidate) {
         try (Connection connection = pool.getConnection();
              PreparedStatement ps = connection.prepareStatement(
-                     "update candidate set name = ? where id = ?")) {
+                     "update candidate set name = ?, city = ? where id = ?")) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
+            ps.setString(2, candidate.getCity());
+            ps.setInt(3, candidate.getId());
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +213,7 @@ public class PsqlStore implements Store {
 
     @Override
     public Candidate findCandidateById(int id) {
-        Candidate candidate = new Candidate(0, "");
+        Candidate candidate = new Candidate(0, "", "");
         try (Connection connection = pool.getConnection();
              PreparedStatement ps = connection.prepareStatement(
                      "select * from candidate where id = ?")) {
@@ -219,6 +222,7 @@ public class PsqlStore implements Store {
                 if (rs.next()) {
                     candidate.setId(rs.getInt("id"));
                     candidate.setName(rs.getString("name"));
+                    candidate.setCity(rs.getString("city"));
                     candidate.setPhotoId(rs.getInt("photo_id"));
                 }
             }
@@ -317,5 +321,46 @@ public class PsqlStore implements Store {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public Collection<City> findAllCities() {
+        List<City> cities = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT * FROM city")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    cities.add(
+                            new City(
+                                    it.getString("name")
+                            )
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cities;
+    }
+
+    @Override
+    public City findCityByName(String name) {
+        City city = new City("");
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "select * from city where name = ?")
+        ) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    city.setName(rs.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return city;
     }
 }
